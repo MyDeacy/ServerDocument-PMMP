@@ -21,6 +21,13 @@ abstract class ElementBase {
 	 */
 	private $directory;
 
+	/**
+	 * ElementBase constructor.
+	 *
+	 * @param string $title
+	 * @param string $buttonImage
+	 * @param Directory|null $directory
+	 */
 	public function __construct(string $title, string $buttonImage, ?Directory $directory) {
 		$this->buttonImage = $buttonImage;
 		$this->title = $title;

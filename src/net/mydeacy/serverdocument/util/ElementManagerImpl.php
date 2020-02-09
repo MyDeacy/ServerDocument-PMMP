@@ -46,6 +46,7 @@ class ElementManagerImpl implements ElementManager {
 
 	/**
 	 * @param Directory|null $directory
+	 * @param string $dir
 	 */
 	private function loadElements(?Directory $directory, string $dir) :void {
 		if (!isset($directory)) {

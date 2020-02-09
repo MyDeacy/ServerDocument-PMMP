@@ -38,6 +38,7 @@ class ExplorerForm implements Form {
 	 * ExplorerForm constructor.
 	 *
 	 * @param Directory|null $directory
+	 * @param ElementManager $manager
 	 */
 	public function __construct(?Directory $directory, ElementManager $manager) {
 		$this->directory = $directory;

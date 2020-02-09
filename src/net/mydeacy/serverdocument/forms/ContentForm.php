@@ -26,6 +26,7 @@ class ContentForm implements Form {
 	 * ContentForm constructor.
 	 *
 	 * @param TextFile $fileElement
+	 * @param ElementManager $manager
 	 */
 	public function __construct(TextFile $fileElement, ElementManager $manager) {
 		$this->fileElement = $fileElement;
