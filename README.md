@@ -29,7 +29,7 @@ Join the server and enter the ``/sd`` command.
 
 
 ## ScreenShots
-![image](https://raw.githubusercontent.com/MyDeacy/ServerDocument-PMMP/master/images/image1.jpg)
-![image](https://raw.githubusercontent.com/MyDeacy/ServerDocument-PMMP/master/images/image2.jpg)
-![image](https://raw.githubusercontent.com/MyDeacy/ServerDocument-PMMP/master/images/image3.jpg)
+![image](https://raw.githubusercontent.com/MyDeacy/ServerDocument-PMMP/master/images/image1.png)
+![image](https://raw.githubusercontent.com/MyDeacy/ServerDocument-PMMP/master/images/image2.png)
+![image](https://raw.githubusercontent.com/MyDeacy/ServerDocument-PMMP/master/images/image3.png)
 
