@@ -4,5 +4,6 @@ branches:
 - master
 projects:
   ServerDocument-PMMP:
-    path: "images/icon.png"
+    path: ""
+    icon: "images/icon.png"
 ...
