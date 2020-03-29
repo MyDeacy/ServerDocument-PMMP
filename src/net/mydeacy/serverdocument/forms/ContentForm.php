@@ -3,13 +3,13 @@
 namespace net\mydeacy\serverdocument\forms;
 
 use net\mydeacy\serverdocument\util\ElementManager;
-use net\mydeacy\serverdocument\util\elements\interfaces\TextFile;
+use net\mydeacy\serverdocument\elements\interfaces\TextFile;
 use pocketmine\form\Form;
 use pocketmine\Player;
 
 class ContentForm implements Form {
 
-	const BACK_BUTTON = "Back";
+	const BACK_BUTTON = "Close";
 	const LINE = "\n\n";
 
 	/**

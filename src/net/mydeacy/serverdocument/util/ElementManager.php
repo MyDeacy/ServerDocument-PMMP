@@ -2,7 +2,7 @@
 
 namespace net\mydeacy\serverdocument\util;
 
-use net\mydeacy\serverdocument\util\elements\interfaces\Directory;
+use net\mydeacy\serverdocument\elements\interfaces\Directory;
 
 interface ElementManager {
 

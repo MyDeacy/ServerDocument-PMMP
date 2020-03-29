@@ -1,6 +1,6 @@
 name: ServerDocument
 api: [3.9]
-version: 0.0.1
+version: 1.0.0
 main: net\mydeacy\serverdocument\ServerDocument
 author: MyDeacy
 description: View text files from server

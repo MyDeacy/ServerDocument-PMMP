@@ -2,17 +2,19 @@
 
 namespace net\mydeacy\serverdocument\forms;
 
+use net\mydeacy\serverdocument\elements\interfaces\CommandFile;
+use net\mydeacy\serverdocument\elements\interfaces\Directory;
+use net\mydeacy\serverdocument\elements\interfaces\Element;
+use net\mydeacy\serverdocument\elements\interfaces\TextFile;
 use net\mydeacy\serverdocument\util\ElementManager;
-use net\mydeacy\serverdocument\util\elements\interfaces\Directory;
-use net\mydeacy\serverdocument\util\elements\interfaces\Element;
-use net\mydeacy\serverdocument\util\elements\interfaces\TextFile;
 use pocketmine\form\Form;
 use pocketmine\Player;
+use pocketmine\Server;
 
 class ExplorerForm implements Form {
 
 	const FORM_TITLE = "§lServerDocument";
-	const BACK_BUTTON = "Back";
+	const BACK_BUTTON = " << Back";
 
 	/**
 	 * @var Element[]
@@ -65,6 +67,8 @@ class ExplorerForm implements Form {
 				$player->sendForm(new ContentForm($element, $this->manager));
 			} elseif ($element instanceof Directory) {
 				$player->sendForm(new ExplorerForm($element, $this->manager));
+			} elseif ($element instanceof CommandFile) {
+				Server::getInstance()->dispatchCommand($player, $element->getCommand());
 			}
 		}
 	}

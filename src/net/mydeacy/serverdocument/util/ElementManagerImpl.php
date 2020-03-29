@@ -2,11 +2,8 @@
 
 namespace net\mydeacy\serverdocument\util;
 
-use net\mydeacy\serverdocument\util\elements\DirectoryElement;
-use net\mydeacy\serverdocument\util\elements\FileElement;
-use net\mydeacy\serverdocument\util\elements\interfaces\Directory;
-use net\mydeacy\serverdocument\util\elements\interfaces\Element;
-use net\mydeacy\serverdocument\util\elements\interfaces\TextFile;
+use net\mydeacy\serverdocument\elements\interfaces\Directory;
+use net\mydeacy\serverdocument\elements\interfaces\Element;
 
 class ElementManagerImpl implements ElementManager {
 
@@ -24,10 +21,10 @@ class ElementManagerImpl implements ElementManager {
 		if (!file_exists($baseDir)) {
 			mkdir($baseDir, 0744, true);
 		}
-		$this->loadElements(null, $baseDir);
+		$this->loadElements(null, $baseDir, new ElementFactoryImpl());
 		arsort($this->elements);
 		uasort($this->elements, function($a, $b) {
-			return $a instanceof Directory && $b instanceof TextFile ? -1 : 1;
+			return $a instanceof Directory && !$b instanceof Directory ? -1 : 1;
 		});
 	}
 
@@ -47,8 +44,9 @@ class ElementManagerImpl implements ElementManager {
 	/**
 	 * @param Directory|null $directory
 	 * @param string $dir
+	 * @param ElementFactory $factory
 	 */
-	private function loadElements(?Directory $directory, string $dir) :void {
+	private function loadElements(?Directory $directory, string $dir, ElementFactory $factory) :void {
 		if (!isset($directory)) {
 			$this->elements = [];
 		}
@@ -58,14 +56,13 @@ class ElementManagerImpl implements ElementManager {
 			if ($fileName === "." || $fileName === "..") {
 				continue;
 			}
-			$fullPath = $dir . $fileName;
-			if (is_file($fullPath) && pathinfo($fullPath)["extension"] ?? "" === "txt") {
-				$content = preg_replace('/(\r\n|\r|\n)/s', "\n", file_get_contents($fullPath));
-				$this->elements[] = new FileElement(pathinfo($fullPath)["filename"], $content, $directory);
-			} elseif (is_dir($fullPath)) {
-				$directoryElement = new DirectoryElement($fileName, $directory);
-				$this->elements[] = $directoryElement;
-				$this->loadElements($directoryElement, $dir);
+			$element = $factory->createElement($fileName, $dir, $directory);
+			if ($element === null) {
+				continue;
+			}
+			$this->elements[] = $element;
+			if ($element instanceof Directory) {
+				$this->loadElements($element, $dir, $factory);
 			}
 		}
 	}
