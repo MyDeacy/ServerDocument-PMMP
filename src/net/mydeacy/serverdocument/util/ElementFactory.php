@@ -9,10 +9,10 @@ interface ElementFactory {
 
 	/**
 	 * @param string $fileName
-	 * @param string $fillPath
+	 * @param string $dir
 	 * @param Directory|null $directory
 	 *
 	 * @return Element|null
 	 */
-	function createElement(string $fileName, string $fillPath, ?Directory $directory) :?Element;
+	function createElement(string $fileName, string $dir, ?Directory $directory) :?Element;
 }
