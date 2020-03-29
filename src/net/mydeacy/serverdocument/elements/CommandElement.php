@@ -13,10 +13,10 @@ class CommandElement extends ElementBase implements CommandFile {
 	private $command;
 
 	/**
-	 * FileElement constructor.
+	 * CommandElement constructor.
 	 *
 	 * @param string $title
-	 * @param string $content
+	 * @param string $command
 	 * @param Directory|null $directory
 	 */
 	public function __construct(string $title, string $command, ?Directory $directory) {
