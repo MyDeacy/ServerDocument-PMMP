@@ -2,10 +2,10 @@
 
 namespace net\mydeacy\serverdocument\forms;
 
-use net\mydeacy\serverdocument\util\ElementManager;
 use net\mydeacy\serverdocument\elements\interfaces\TextFile;
+use net\mydeacy\serverdocument\util\ElementLoader;
 use pocketmine\form\Form;
-use pocketmine\Player;
+use pocketmine\player\Player;
 
 class ContentForm implements Form {
 
@@ -15,27 +15,18 @@ class ContentForm implements Form {
 	/**
 	 * @var TextFile
 	 */
-	private $fileElement;
+	private TextFile $fileElement;
 
 	/**
-	 * @var ElementManager
+	 * @var ElementLoader
 	 */
-	private $manager;
+	private ElementLoader $manager;
 
-	/**
-	 * ContentForm constructor.
-	 *
-	 * @param TextFile $fileElement
-	 * @param ElementManager $manager
-	 */
-	public function __construct(TextFile $fileElement, ElementManager $manager) {
+	public function __construct(TextFile $fileElement, ElementLoader $manager) {
 		$this->fileElement = $fileElement;
 		$this->manager = $manager;
 	}
 
-	/**
-	 * @inheritDoc
-	 */
 	public function handleResponse(Player $player, $data) :void {
 		if (!isset($data)) {
 			return;
@@ -43,9 +34,6 @@ class ContentForm implements Form {
 		$player->sendForm(new ExplorerForm($this->fileElement->getDirectory(), $this->manager));
 	}
 
-	/**
-	 * @inheritDoc
-	 */
 	public function jsonSerialize() {
 		$form = (new SimpleForm())
 			->setTitle($this->fileElement->getTitle())

@@ -6,9 +6,9 @@ use net\mydeacy\serverdocument\elements\interfaces\CommandFile;
 use net\mydeacy\serverdocument\elements\interfaces\Directory;
 use net\mydeacy\serverdocument\elements\interfaces\Element;
 use net\mydeacy\serverdocument\elements\interfaces\TextFile;
-use net\mydeacy\serverdocument\util\ElementManager;
+use net\mydeacy\serverdocument\util\ElementLoader;
 use pocketmine\form\Form;
-use pocketmine\Player;
+use pocketmine\player\Player;
 use pocketmine\Server;
 
 class ExplorerForm implements Form {
@@ -19,39 +19,30 @@ class ExplorerForm implements Form {
 	/**
 	 * @var Element[]
 	 */
-	private $elements = [];
+	private array $elements = [];
 
 	/**
 	 * @var Directory|null
 	 */
-	private $directory;
+	private ?Directory $directory;
 
 	/**
-	 * @var ElementManager
+	 * @var ElementLoader
 	 */
-	private $manager;
+	private ElementLoader $manager;
 
 	/**
 	 * @var bool
 	 */
-	private $isBaseDir;
+	private bool $isBaseDir;
 
-	/**
-	 * ExplorerForm constructor.
-	 *
-	 * @param Directory|null $directory
-	 * @param ElementManager $manager
-	 */
-	public function __construct(?Directory $directory, ElementManager $manager) {
+	public function __construct(?Directory $directory, ElementLoader $manager) {
 		$this->directory = $directory;
 		$this->isBaseDir = !isset($directory);
 		$this->elements = $manager->getFilesByDirectory($directory);
 		$this->manager = $manager;
 	}
 
-	/**
-	 * @inheritDoc
-	 */
 	public function handleResponse(Player $player, $data) :void {
 		if (!isset($data)) {
 			return;
@@ -60,7 +51,6 @@ class ExplorerForm implements Form {
 		if ($select === -1 && !$this->isBaseDir) {
 			$beforeDir = $this->isBaseDir ? null : $this->directory->getDirectory();
 			$player->sendForm(new ExplorerForm($beforeDir, $this->manager));
-			return;
 		} else {
 			$element = $this->elements[$select];
 			if ($element instanceof TextFile) {
@@ -73,9 +63,6 @@ class ExplorerForm implements Form {
 		}
 	}
 
-	/**
-	 * @inheritDoc
-	 */
 	public function jsonSerialize() {
 		$form = new SimpleForm();
 		$head = $this->isBaseDir ? "/" : $this->directory->getTitle();

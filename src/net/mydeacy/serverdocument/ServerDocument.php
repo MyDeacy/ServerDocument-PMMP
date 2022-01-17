@@ -2,12 +2,12 @@
 
 namespace net\mydeacy\serverdocument;
 
+use Exception;
 use net\mydeacy\serverdocument\forms\ExplorerForm;
-use net\mydeacy\serverdocument\util\ElementManager;
-use net\mydeacy\serverdocument\util\ElementManagerImpl;
+use net\mydeacy\serverdocument\util\ElementLoader;
 use pocketmine\command\Command;
 use pocketmine\command\CommandSender;
-use pocketmine\Player;
+use pocketmine\player\Player;
 use pocketmine\plugin\PluginBase;
 
 class ServerDocument extends PluginBase {
@@ -17,14 +17,14 @@ class ServerDocument extends PluginBase {
 	const READ_ERROR = "Reading of the file failed.";
 
 	/**
-	 * @var ElementManager
+	 * @var ElementLoader
 	 */
-	private $manager;
+	private ElementLoader $manager;
 
-	public function onEnable() {
+	public function onEnable() :void {
 		try {
-			$this->manager = new ElementManagerImpl($this->getDataFolder() . self::PUBLIC_DIR);
-		} catch (\Exception $e) {
+			$this->manager = new ElementLoader($this->getDataFolder() . self::PUBLIC_DIR);
+		} catch (Exception $e) {
 			$this->getLogger()->critical(self::READ_ERROR);
 		}
 	}

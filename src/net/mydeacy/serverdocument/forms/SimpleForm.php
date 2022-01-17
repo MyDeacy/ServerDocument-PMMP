@@ -7,7 +7,7 @@ class SimpleForm {
 	/**
 	 * @var string[]
 	 */
-	private $formData = [];
+	private array $formData = [];
 
 	public function __construct() {
 		$this->formData = [
@@ -18,17 +18,17 @@ class SimpleForm {
 		];
 	}
 
-	public function setTitle(String $title) {
+	public function setTitle(string $title) :static {
 		$this->formData["title"] = $title;
 		return $this;
 	}
 
-	public function setContent(String $text) {
+	public function setContent(string $text) :static {
 		$this->formData["content"] = $text;
 		return $this;
 	}
 
-	public function addButton(String $text, $image = null) {
+	public function addButton(string $text, $image = null) :static {
 		if ($image !== null) {
 			$this->formData["buttons"][] = [
 				"text"  => $text,

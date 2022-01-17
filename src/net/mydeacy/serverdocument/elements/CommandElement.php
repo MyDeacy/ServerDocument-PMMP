@@ -10,7 +10,7 @@ class CommandElement extends ElementBase implements CommandFile {
 	/**
 	 * @var string
 	 */
-	private $command;
+	private string $command;
 
 	/**
 	 * CommandElement constructor.
@@ -24,9 +24,6 @@ class CommandElement extends ElementBase implements CommandFile {
 		$this->command = $command;
 	}
 
-	/**
-	 * @inheritDoc
-	 */
 	function getCommand() :string {
 		return $this->command;
 	}

@@ -1,10 +1,14 @@
 name: ServerDocument
-api: [3.9]
-version: 1.0.0
+api: [ 4.0.0 ]
+version: 1.1.0
 main: net\mydeacy\serverdocument\ServerDocument
 author: MyDeacy
 description: View text files from server
 commands:
- sd:
-   description: open document directory.
-   usage: /sd
+  sd:
+    description: open document directory.
+    usage: /sd
+    permission: serverdocument.common
+permissions:
+  serverdocument.common:
+    default: true
